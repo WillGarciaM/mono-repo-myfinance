@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Between } from 'typeorm';
 import { Transacao } from './transacao.entity';
 import { CreateTransacaoDto } from './dto/create-transacao.dto';
 import { UpdateTransacaoDto } from './dto/update-transacao.dto';
@@ -57,5 +57,16 @@ export class TransacoesService {
       throw new NotFoundException('Transação não encontrada');
     }
     await this.transacaoRepository.delete(id);
+  }
+
+  async findWithinDateRange(startDate: Date, endDate: Date): Promise<Transacao[]> {
+    return this.transacaoRepository.find({
+      where: {
+        data: 
+          Between(startDate, endDate)
+        ,
+      },
+      relations: ['planoContas'],
+    });
   }
 }

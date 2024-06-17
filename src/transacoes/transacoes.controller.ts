@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+// src/transacoes/transacoes.controller.ts
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TransacoesService } from './transacoes.service';
 import { CreateTransacaoDto } from './dto/create-transacao.dto';
 import { UpdateTransacaoDto } from './dto/update-transacao.dto';
@@ -12,6 +13,11 @@ export class TransacoesController {
     return this.transacoesService.create(createTransacaoDto);
   }
 
+  @Get('intervalo')
+  findWithinDateRange(@Query('startDate') startDate: string, @Query('endDate') endDate: string) {
+    return this.transacoesService.findWithinDateRange(new Date(startDate), new Date(endDate));
+  }
+
   @Get()
   findAll() {
     return this.transacoesService.findAll();
@@ -22,7 +28,7 @@ export class TransacoesController {
     return this.transacoesService.findOne(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   update(@Param('id') id: number, @Body() updateTransacaoDto: UpdateTransacaoDto) {
     return this.transacoesService.update(id, updateTransacaoDto);
   }
