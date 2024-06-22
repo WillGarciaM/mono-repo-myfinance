@@ -14,12 +14,12 @@ import { Transacao } from './transacoes/transacao.entity';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get<string>('MYSQLHOST'),
-        port: configService.get<number>('MYSQLPORT'),
-        username: configService.get<string>('MYSQLUSER'),
-        password: configService.get<string>('MYSQLPASSWORD'),
-        database: configService.get<string>('MYSQLDATABASE'),
+        type: 'postgres',
+        host: configService.get<string>('DBHOST'),
+        port: configService.get<number>('DBPORT'),
+        username: configService.get<string>('DBUSER'),
+        password: configService.get<string>('DBPASSWORD'),
+        database: configService.get<string>('DBDATABASE'),
         entities: [PlanoContas, Transacao],
         synchronize: true,
       }),
