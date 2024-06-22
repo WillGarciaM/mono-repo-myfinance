@@ -1,6 +1,3 @@
-// src/api/api.js
-// Mocking API calls for testing
-
 let transacoesMock = [
     { id: 1, descricao: 'Compra no supermercado', data: '2023-06-01', planoContasId: 1, valor: 100.50 },
     { id: 2, descricao: 'Pagamento de aluguel', data: '2023-06-05', planoContasId: 2, valor: 1200.00 },
@@ -66,9 +63,32 @@ export const getPlanosDeContas = () => {
     });
 };
 
+export const searchTransacoes = (query) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const results = transacoesMock.filter((t) => t.descricao.toLowerCase().includes(query.descricao.toLowerCase()));
+            resolve({ data: results });
+        }, 500);
+    });
+};
+
+export const getTransacaoByInterval = (startDate, endDate) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const results = transacoesMock.filter((t) => {
+                const data = new Date(t.data);
+                return data >= new Date(startDate) && data <= new Date(endDate);
+            });
+            resolve({ data: results });
+        }, 500);
+    });
+};
+
 const api = {
     getTransacoes,
     getTransacaoById,
+    getTransacaoByInterval,
+    searchTransacoes,
     createTransacao,
     updateTransacao,
     deleteTransacao,
