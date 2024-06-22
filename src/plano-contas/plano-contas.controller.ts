@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Put, Param, Delete } from '@nestjs/common';
 import { PlanoContasService } from './plano-contas.service';
 import { CreatePlanoContasDto } from './dto/create-plano-contas.dto';
 import { UpdatePlanoContasDto } from './dto/update-plano-contas.dto';
@@ -22,8 +22,13 @@ export class PlanoContasController {
     return this.planoContasService.findOne(id);
   }
 
+  @Patch(':id')
+  updatePartial(@Param('id') id: number, @Body() updatePlanoContasDto: UpdatePlanoContasDto) {
+    return this.planoContasService.update(id, updatePlanoContasDto);
+  }
+
   @Put(':id')
-  update(@Param('id') id: number, @Body() updatePlanoContasDto: UpdatePlanoContasDto) {
+  updateFull(@Param('id') id: number, @Body() updatePlanoContasDto: CreatePlanoContasDto) {
     return this.planoContasService.update(id, updatePlanoContasDto);
   }
 

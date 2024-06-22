@@ -1,5 +1,5 @@
 // src/transacoes/transacoes.controller.ts
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Put, Param, Delete, Query } from '@nestjs/common';
 import { TransacoesService } from './transacoes.service';
 import { CreateTransacaoDto } from './dto/create-transacao.dto';
 import { UpdateTransacaoDto } from './dto/update-transacao.dto';
@@ -29,7 +29,12 @@ export class TransacoesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateTransacaoDto: UpdateTransacaoDto) {
+  updatePartial(@Param('id') id: number, @Body() updateTransacaoDto: UpdateTransacaoDto) {
+    return this.transacoesService.update(id, updateTransacaoDto);
+  }
+
+  @Put(':id')
+  updateFull(@Param('id') id: number, @Body() updateTransacaoDto: CreateTransacaoDto) {
     return this.transacoesService.update(id, updateTransacaoDto);
   }
 
