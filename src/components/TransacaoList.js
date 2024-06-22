@@ -20,19 +20,17 @@ const TransacaoList = () => {
   };
 
   return (
-    <div>
-      <h1>Transações</h1>
-      <Link to="/create">Criar Nova Transação</Link>
-      <ul>
-        {transacoes.map((transacao) => (
-          <li key={transacao.id}>
-            {transacao.descricao} - {transacao.valor}
+    <ul>
+      {transacoes.map((transacao) => (
+        <li key={transacao.id}>
+          <span>{transacao.descricao} - R${transacao.valor.toFixed(2)}</span>
+          <span>
             <Link to={`/edit/${transacao.id}`}>Editar</Link>
             <button onClick={() => handleDelete(transacao.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 };
 

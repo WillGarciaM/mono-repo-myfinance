@@ -3,7 +3,7 @@ import TransacaoList from '../components/TransacaoList';
 
 const HomePage = () => (
   <div>
-    <h1>Home</h1>
+    <h1>Transações</h1>
     <TransacaoList />
   </div>
 );
