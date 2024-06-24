@@ -4,6 +4,7 @@ export class CreateTransacaoDto {
     @ApiProperty({})
     descricao: string;
 
+    @ApiProperty({})
     data: Date;
 
     @ApiProperty({})
