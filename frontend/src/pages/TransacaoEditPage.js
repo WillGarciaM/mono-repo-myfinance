@@ -18,8 +18,9 @@ const TransacaoEditPage = () => {
   }, [id]);
 
   const handleSubmit = async (transacao) => {
+    console.log(transacao);
     await updateTransacao(id, transacao);
-    navigate('/');
+    // navigate('/');
   };
 
   if (!initialData) {
@@ -28,8 +29,8 @@ const TransacaoEditPage = () => {
 
   return (
     <div>
-      <h1>Editar Transação</h1>
-      <TransacaoForm onSubmit={handleSubmit} initialData={initialData} />
+      <h1>Editar Transação</h1> <>{console.log(initialData)}</>
+      <TransacaoForm onSubmit={handleSubmit} initialData={initialData} calledFor={'edit'} />
     </div>
   );
 };

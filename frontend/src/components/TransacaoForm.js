@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import baseURL from '../common/baseURL';
+import moment from 'moment';
 
-const TransacaoForm = ({ onSubmit, initialData = {} }) => {
+const TransacaoForm = ({ onSubmit, initialData = {}, calledFor }) => {
   const [descricao, setDescricao] = useState(initialData.descricao || '');
   const [data, setData] = useState(initialData.data || '');
-  const [planoContasId, setPlanoContasId] = useState(initialData.planoContasId || '');
+  const [planoContas, setPlanoContas] = useState(initialData.planoContas || '');
   const [valor, setValor] = useState(initialData.valor || '');
-  const [planosDeContas, setPlanosDeContas] = useState([]);
+  const [selectionPlanosDeContas, setSelectionPlanosDeContas] = useState([]);
 
   useEffect(() => {
-    const fetchPlanosDeContas = async () => {
+    const fetchSelectionPlanosDeContas = async () => {
       await axios.get(`${baseURL}/plano-contas`).then((response) => {
-        setPlanosDeContas(response.data);
+        setSelectionPlanosDeContas(response.data);
       })
+
+      if (initialData) {
+        setData(moment(data).tz('Etc/GMT+0').format("YYYY-MM-DDTHH:mm"));
+      }
     };
 
-    fetchPlanosDeContas();
+    fetchSelectionPlanosDeContas();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ descricao, data, planoContasId, valor });
+    onSubmit({ descricao, data, planoContas, valor});
   };
 
   return (
@@ -35,10 +40,10 @@ const TransacaoForm = ({ onSubmit, initialData = {} }) => {
         <input type="datetime-local" value={data} onChange={(e) => setData(e.target.value)} required />
       </div>
       <div>
-        <label>Plano de Contas:</label>
-        <select value={planoContasId} onChange={(e) => setPlanoContasId(e.target.value)} required>
-          <option value="">Selecione um Plano de Contas</option>
-          {planosDeContas.map((plano) => (
+        <label>Plano de Contas:</label> <>{console.log(planoContas)}</>
+        <select value={planoContas} onChange={(e) => setPlanoContas(e.target.value)} required>
+          <option value={planoContas}>Selecione um Plano de Contas</option>
+          {selectionPlanosDeContas.map((plano) => (
             <option key={plano.id} value={plano.id}>{plano.descricao}</option>
           ))}
         </select>
