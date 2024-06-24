@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
+const AccountPlanForm = ({ onSubmit, initialData = {}, calledFor }) => {
+  const navigate = useNavigate();
   const [descricao, setDescricao] = useState(initialData.descricao || '');
   const [tipo, setTipo] = useState(initialData.tipo || '');
 
@@ -14,8 +16,10 @@ const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
   }, [initialData.descricao, initialData.tipo]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     onSubmit({ descricao, tipo });
+
+    if(calledFor === 'edit')
+      navigate('/list-accounts-plans')
   };
 
   return (
