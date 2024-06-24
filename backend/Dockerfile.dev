@@ -4,7 +4,6 @@ ENV NODE_ENV=development
 WORKDIR "/app"
 
 COPY ./package.json ./
-COPY ./env ./
 
 RUN npm install
 
