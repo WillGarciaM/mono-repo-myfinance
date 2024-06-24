@@ -6,6 +6,7 @@ import TransacaoEditPage from './pages/TransacaoEditPage';
 import TransacaoDetailPage from './pages/TransacaoDetailPage';
 
 import AccountPlanCreatePage from './pages/AccountPlanCreatePage';
+import AccountPlanEditPage from './pages/AccountPlanEditPage';
 import ListAccountsPlans from './pages/ListAccountsPlans';
 
 import './App.css';
@@ -27,6 +28,7 @@ const App = () => (
         <Route path="/transacao/:id" element={<TransacaoDetailPage />} />
 
         <Route path="/create-account-plan" element={<AccountPlanCreatePage />} />
+        <Route path="/edit-account-plan/:id" element={<AccountPlanEditPage />} />
         <Route path="/list-accounts-plans" element={<ListAccountsPlans />} />
       </Routes>
     </div>

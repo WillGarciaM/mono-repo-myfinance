@@ -35,24 +35,30 @@ export const getTransacaoByInterval = (startDate, endDate) => {
     return axios.get(`${baseURL}/transacoes/intervalo?startDate=${startDate}&endDate=${endDate}`);
 }
 
+// TODO: TIRAR
 export const getPlanosDeContas = () => {
     return axios.get(`${baseURL}/plano-contas`);
 
 }
 
+
+export const getAccountPlan = () => {
+    return axios.get(`${baseURL}/plano-contas`);
+};
+
+export const getAccountPlanById = (id) => {
+    return axios.get(`${baseURL}/plano-contas/${id}`);
+};
+
 export const createAccountPlan = (accountPlan) => {
     return axios.post(`${baseURL}/plano-contas`, accountPlan);
 }
 
-export const getAccountsPlans = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({ data: accountPlanMock });
-        }, 500);
-    });
-};
+export const updateAccountPlan = (id, updateAccountPlan) => {
+    return axios.put(`${baseURL}/plano-contas/${id}`, updateAccountPlan);
+}
 
-export const searchAccountsPlan = (query) => {
+export const searchAccountPlan = (query) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             const results = accountPlanMock.filter((acc) => acc.descricao.toLowerCase().includes(query.descricao.toLowerCase()));
@@ -80,9 +86,11 @@ const api = {
     deleteTransacao,
     getPlanosDeContas,
 
+    getAccountPlan,
+    getAccountPlanById,
+    searchAccountPlan,
     createAccountPlan,
-    getAccountsPlans,
-    searchAccountsPlan,
+    updateAccountPlan,
     deleteAccountPlan,
 };
 
