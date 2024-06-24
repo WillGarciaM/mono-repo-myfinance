@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAccountsPlans, searchAccountsPlan, deleteAccountPlan } from '../api/api';
+import axios from "axios";
+import baseURL from '../common/baseURL';
 
 const ListAccountsPlans = () => {
     const [accountsPlans, setAccountsPlans] = useState([]);
@@ -9,8 +11,9 @@ const ListAccountsPlans = () => {
 
     useEffect(() => {
         const fetchAccountsPlan = async () => {
-            const response = await getAccountsPlans();
-            setAccountsPlans(response.data);
+            await axios.get(`${baseURL}/plano-contas`).then((response) => {
+                setAccountsPlans(response.data);
+            })
         };
 
         fetchAccountsPlan();
