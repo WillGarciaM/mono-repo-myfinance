@@ -5,10 +5,13 @@ const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
   const [tipo, setTipo] = useState(initialData.tipo || '');
 
   useEffect(() => {
+    if (initialData.descricao) {
+      setDescricao(initialData.descricao);
+    }
     if (initialData.tipo) {
       setTipo(initialData.tipo);
     }
-  }, [initialData.tipo]);
+  }, [initialData.descricao, initialData.tipo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

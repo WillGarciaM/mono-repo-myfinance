@@ -19,7 +19,7 @@ const AccountPlanEditPage = () => {
 
   const handleSubmit = async (accountPlan) => {
     await updateAccountPlan(id, accountPlan);
-    navigate('/');
+    navigate('/list-accounts-plans');
   };
 
   if (!initialData) {
