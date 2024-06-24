@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getPlanosDeContas } from '../api/api';
+import axios from "axios";
+import baseURL from '../common/baseURL';
 
 const TransacaoForm = ({ onSubmit, initialData = {} }) => {
   const [descricao, setDescricao] = useState(initialData.descricao || '');
@@ -10,8 +11,9 @@ const TransacaoForm = ({ onSubmit, initialData = {} }) => {
 
   useEffect(() => {
     const fetchPlanosDeContas = async () => {
-      const response = await getPlanosDeContas();
-      setPlanosDeContas(response.data);
+      await axios.get(`${baseURL}/plano-contas`).then((response) => {
+        setPlanosDeContas(response.data);
+      })
     };
 
     fetchPlanosDeContas();
@@ -30,14 +32,14 @@ const TransacaoForm = ({ onSubmit, initialData = {} }) => {
       </div>
       <div>
         <label>Data:</label>
-        <input type="date" value={data} onChange={(e) => setData(e.target.value)} required />
+        <input type="datetime-local" value={data} onChange={(e) => setData(e.target.value)} required />
       </div>
       <div>
         <label>Plano de Contas:</label>
         <select value={planoContasId} onChange={(e) => setPlanoContasId(e.target.value)} required>
           <option value="">Selecione um Plano de Contas</option>
           {planosDeContas.map((plano) => (
-            <option key={plano.id} value={plano.id}>{plano.nome}</option>
+            <option key={plano.id} value={plano.id}>{plano.descricao}</option>
           ))}
         </select>
       </div>
