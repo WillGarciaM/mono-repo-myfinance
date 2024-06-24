@@ -4,11 +4,12 @@ ENV NODE_ENV=development
 WORKDIR "/app"
 
 COPY ./package.json ./
+COPY ./env ./
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 3001
 
 COPY . .
 
-CMD ["npm", "start"]
+CMD [ "npm", "run", "start" ]
