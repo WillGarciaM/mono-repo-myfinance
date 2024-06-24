@@ -20,10 +20,6 @@ const TransacaoList = () => {
         fetchTransacoes();
     }, []);
 
-    // const handleDelete = async (id) => {
-    //     await deleteTransacao(id);
-    //     setTransacoes(transacoes.filter((transacao) => transacao.id !== id));
-    // };
     const handleDelete = async () => {
         await deleteTransacao(transacaoToDelete);
         setTransacoes(transacoes.filter((transacao) => transacao.id !== transacaoToDelete));
@@ -35,9 +31,11 @@ const TransacaoList = () => {
         if (searchQuery) {
             const response = await searchTransacoes({ descricao: searchQuery });
             setTransacoes(response.data);
+            closeSearchModal();
         } else {
             const response = await getTransacoes();
             setTransacoes(response.data);
+            closeSearchModal();
         }
     };
 
@@ -46,15 +44,19 @@ const TransacaoList = () => {
         if (startDate && endDate) {
             const response = await getTransacaoByInterval(startDate, endDate);
             setTransacoes(response.data);
+            closeSearchModal();
+        } else {
+            const response = await getTransacoes();
+            setTransacoes(response.data);
+            closeSearchModal();
         }
     };
 
-
-    const openModal = () => {
+    const openSearchModal = () => {
         setIsModalOpen(true);
     };
 
-    const closeModal = () => {
+    const closeSearchModal = () => {
         setIsModalOpen(false);
     };
 
@@ -70,21 +72,23 @@ const TransacaoList = () => {
 
     return (
         <div>
-            <button onClick={openModal}>Pesquisa</button>
+            <button onClick={openSearchModal}>Pesquisa</button>
             {isModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={closeModal}>&times;</span>
+                        <span className="close" onClick={closeSearchModal}>&times;</span>
                         <form onSubmit={handleSearch}>
+                            <span> Pesquisar por descrição</span>
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Pesquisar por descrição"
+                                placeholder="Descrição"
                             />
                             <button type="submit">Pesquisar</button>
                         </form>
                         <form onSubmit={handleDateSearch}>
+                            <span> Pesquisar por intervalo de data</span>
                             <input
                                 type="date"
                                 value={startDate}
@@ -95,7 +99,7 @@ const TransacaoList = () => {
                                 value={endDate}
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
-                            <button type="submit">Pesquisar por intervalo</button>
+                            <button type="submit">Pesquisar</button>
                         </form>
                     </div>
                 </div>
