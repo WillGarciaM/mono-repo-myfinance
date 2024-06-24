@@ -85,7 +85,7 @@ const TransacaoList = () => {
             <ul>
                 {transacoes.map((transacao) => (
                     <li key={transacao.id}>
-                        <span>{transacao.descricao} - R${transacao.valor.toFixed(2)}</span>
+                        <span>{transacao.descricao} - R${transacao.valor}</span>
                         <span>
                             <Link to={`/edit/${transacao.id}`}>Editar</Link>
                             <button onClick={() => handleDelete(transacao.id)}>Excluir</button>

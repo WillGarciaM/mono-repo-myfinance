@@ -8,6 +8,10 @@ let planosDeContasMock = [
     { id: 2, nome: 'Moradia' },
 ];
 
+var accountPlanMock = [
+    { id: 1, descricao: 'Compra no supermercado', tipo: "Despesa" },
+];
+
 export const getTransacoes = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -84,6 +88,42 @@ export const getTransacaoByInterval = (startDate, endDate) => {
     });
 };
 
+export const createAccountPlan = (accountPlan) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            accountPlan.id = accountPlanMock.length + 1;
+            accountPlanMock.push(accountPlan);
+            resolve({ data: accountPlan });
+        }, 500);
+    });
+};
+
+export const getAccountsPlans = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({ data: accountPlanMock });
+        }, 500);
+    });
+};
+
+export const searchAccountsPlan = (query) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const results = accountPlanMock.filter((acc) => acc.descricao.toLowerCase().includes(query.descricao.toLowerCase()));
+            resolve({ data: results });
+        }, 500);
+    });
+};
+
+export const deleteAccountPlan = (id) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            accountPlanMock = accountPlanMock.filter((accountPlan) => accountPlan.id !== parseInt(id));
+            resolve({ data: id });
+        }, 500);
+    });
+};
+
 const api = {
     getTransacoes,
     getTransacaoById,
@@ -93,6 +133,11 @@ const api = {
     updateTransacao,
     deleteTransacao,
     getPlanosDeContas,
+
+    createAccountPlan,
+    getAccountsPlans,
+    searchAccountsPlan,
+    deleteAccountPlan,
 };
 
 export default api;

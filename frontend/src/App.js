@@ -4,6 +4,10 @@ import HomePage from './pages/HomePage';
 import TransacaoCreatePage from './pages/TransacaoCreatePage';
 import TransacaoEditPage from './pages/TransacaoEditPage';
 import TransacaoDetailPage from './pages/TransacaoDetailPage';
+
+import AccountPlanCreatePage from './pages/AccountPlanCreatePage';
+import ListAccountsPlans from './pages/ListAccountsPlans';
+
 import './App.css';
 
 const App = () => (
@@ -12,12 +16,18 @@ const App = () => (
       <div className="nav">
         <a href="/">Home</a>
         <a href="/create">Criar Transação</a>
+        <a href='/account-plan'>Plano de Contas</a>
+        <a href='/list-accounts-plans'>Planos de Contas Cadastrados</a>
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        
         <Route path="/create" element={<TransacaoCreatePage />} />
         <Route path="/edit/:id" element={<TransacaoEditPage />} />
         <Route path="/transacao/:id" element={<TransacaoDetailPage />} />
+
+        <Route path="/account-plan" element={<AccountPlanCreatePage />} />
+        <Route path="/list-accounts-plans" element={<ListAccountsPlans />} />
       </Routes>
     </div>
   </Router>
