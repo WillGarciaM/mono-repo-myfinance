@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getTransacoes, deleteTransacao, searchTransacoes, getTransacaoByInterval } from '../api/api';
+import moment from 'moment-timezone';
 
 const TransacaoList = () => {
     const [transacoes, setTransacoes] = useState([]);
@@ -117,7 +118,7 @@ const TransacaoList = () => {
             <ul>
                 {transacoes.map((transacao) => (
                     <li key={transacao.id}>
-                        <span>{transacao.descricao} - R${transacao.valor} - {new Date()}</span>
+                        <span>{transacao.descricao} - R${transacao.valor} - {moment(transacao.data).tz('Etc/GMT+0').format('DD/MM/YYYY - HH:mm')}</span>
                         <span>
                             <Link to={`/edit/${transacao.id}`}>Editar</Link>
                             <button onClick={() => openDeleteModal(transacao.id)}>Excluir</button>
