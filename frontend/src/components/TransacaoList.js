@@ -8,6 +8,8 @@ const TransacaoList = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [transacaoToDelete, setTransacaoToDelete] = useState(null);
 
     useEffect(() => {
         const fetchTransacoes = async () => {
@@ -18,9 +20,14 @@ const TransacaoList = () => {
         fetchTransacoes();
     }, []);
 
-    const handleDelete = async (id) => {
-        await deleteTransacao(id);
-        setTransacoes(transacoes.filter((transacao) => transacao.id !== id));
+    // const handleDelete = async (id) => {
+    //     await deleteTransacao(id);
+    //     setTransacoes(transacoes.filter((transacao) => transacao.id !== id));
+    // };
+    const handleDelete = async () => {
+        await deleteTransacao(transacaoToDelete);
+        setTransacoes(transacoes.filter((transacao) => transacao.id !== transacaoToDelete));
+        closeDeleteModal();
     };
 
     const handleSearch = async (e) => {
@@ -42,12 +49,23 @@ const TransacaoList = () => {
         }
     };
 
+
     const openModal = () => {
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openDeleteModal = (id) => {
+        setTransacaoToDelete(id);
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setTransacaoToDelete(null);
     };
 
     return (
@@ -82,13 +100,23 @@ const TransacaoList = () => {
                     </div>
                 </div>
             )}
+            {isDeleteModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeDeleteModal}>&times;</span>
+                        <p>Você tem certeza que deseja excluir esta transação?</p>
+                        <button onClick={handleDelete}>Excluir</button>
+                        <button onClick={closeDeleteModal}>Cancelar</button>
+                    </div>
+                </div>
+            )}
             <ul>
                 {transacoes.map((transacao) => (
                     <li key={transacao.id}>
                         <span>{transacao.descricao} - R${transacao.valor}</span>
                         <span>
                             <Link to={`/edit/${transacao.id}`}>Editar</Link>
-                            <button onClick={() => handleDelete(transacao.id)}>Excluir</button>
+                            <button onClick={() => openDeleteModal(transacao.id)}>Excluir</button>
                         </span>
                     </li>
                 ))}
