@@ -58,23 +58,31 @@ export const updateAccountPlan = (id, updateAccountPlan) => {
     return axios.put(`${baseURL}/plano-contas/${id}`, updateAccountPlan);
 }
 
+// export const searchAccountPlan = (query) => {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             const results = accountPlanMock.filter((acc) => acc.descricao.toLowerCase().includes(query.descricao.toLowerCase()));
+//             resolve({ data: results });
+//         }, 500);
+//     });
+// };
+
 export const searchAccountPlan = (query) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const results = accountPlanMock.filter((acc) => acc.descricao.toLowerCase().includes(query.descricao.toLowerCase()));
-            resolve({ data: results });
-        }, 500);
-    });
-};
+    return axios.get(`${baseURL}/plano-contas?descricao=${query.descricao}`);
+}
+
+// export const deleteAccountPlan = (id) => {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             accountPlanMock = accountPlanMock.filter((accountPlan) => accountPlan.id !== parseInt(id));
+//             resolve({ data: id });
+//         }, 500);
+//     });
+// };
 
 export const deleteAccountPlan = (id) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            accountPlanMock = accountPlanMock.filter((accountPlan) => accountPlan.id !== parseInt(id));
-            resolve({ data: id });
-        }, 500);
-    });
-};
+    return axios.delete(`${baseURL}/plano-contas/${id}`);
+}
 
 const api = {
     getTransacoes,
@@ -84,6 +92,7 @@ const api = {
     createTransacao,
     updateTransacao,
     deleteTransacao,
+    
     getPlanosDeContas,
 
     getAccountPlan,

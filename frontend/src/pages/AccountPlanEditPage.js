@@ -28,7 +28,7 @@ const AccountPlanEditPage = () => {
 
   return (
     <div>
-      <h1>Editar Transação</h1>
+      <h1>Editar Plano de Contas</h1>
       <AccountPlanForm onSubmit={handleSubmit} initialData={initialData} />
     </div>
   );
