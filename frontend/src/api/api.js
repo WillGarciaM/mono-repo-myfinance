@@ -41,14 +41,8 @@ export const getPlanosDeContas = () => {
 }
 
 export const createAccountPlan = (accountPlan) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            accountPlan.id = accountPlanMock.length + 1;
-            accountPlanMock.push(accountPlan);
-            resolve({ data: accountPlan });
-        }, 500);
-    });
-};
+    return axios.post(`${baseURL}/plano-contas`, accountPlan);
+}
 
 export const getAccountsPlans = () => {
     return new Promise((resolve) => {

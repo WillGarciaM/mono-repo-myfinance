@@ -13,7 +13,7 @@ const TransacaoCreatePage = () => {
 
   return (
     <div>
-      <h1>Criar Nova Transação</h1>
+      <h1>Criar nova Transação</h1>
       <TransacaoForm onSubmit={handleSubmit} />
     </div>
   );

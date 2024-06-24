@@ -15,18 +15,18 @@ const App = () => (
     <div className="container">
       <div className="nav">
         <a href="/">Home</a>
-        <a href="/create">Criar Transação</a>
-        <a href='/account-plan'>Plano de Contas</a>
+        <a href="/create-transaction">Criar Transação</a>
+        <a href='/create-account-plan'>Criar Plano de Contas</a>
         <a href='/list-accounts-plans'>Planos de Contas Cadastrados</a>
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         
-        <Route path="/create" element={<TransacaoCreatePage />} />
+        <Route path="/create-transaction" element={<TransacaoCreatePage />} />
         <Route path="/edit/:id" element={<TransacaoEditPage />} />
         <Route path="/transacao/:id" element={<TransacaoDetailPage />} />
 
-        <Route path="/account-plan" element={<AccountPlanCreatePage />} />
+        <Route path="/create-account-plan" element={<AccountPlanCreatePage />} />
         <Route path="/list-accounts-plans" element={<ListAccountsPlans />} />
       </Routes>
     </div>
