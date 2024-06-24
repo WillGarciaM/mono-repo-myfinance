@@ -58,6 +58,9 @@ const AccountPlanList = () => {
 
     return (
         <div>
+            <button>
+                <Link to={`/create-account-plan`}>Criar Plano de Contas</Link>
+            </button>
             <button onClick={openSearchModal}>Pesquisa</button>
             {isModalOpen && (
                 <div className="modal">

@@ -15,10 +15,8 @@ const App = () => (
   <Router>
     <div className="container">
       <div className="nav">
-        <a href="/">Home</a>
-        <a href="/create-transaction">Criar Transação</a>
-        <a href='/create-account-plan'>Criar Plano de Contas</a>
-        <a href='/list-accounts-plans'>Planos de Contas Cadastrados</a>
+        <a href="/">Transações</a>
+        <a href='/list-accounts-plans'>Planos de Contas </a>
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />

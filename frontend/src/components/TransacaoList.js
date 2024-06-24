@@ -73,6 +73,9 @@ const TransacaoList = () => {
 
     return (
         <div>
+            <button>
+                <Link to={`/create-transaction`}>Criar Transação</Link>
+            </button>
             <button onClick={openSearchModal}>Pesquisa</button>
             {isModalOpen && (
                 <div className="modal">
