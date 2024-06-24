@@ -1,0 +1,27 @@
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_PRODUCTION_API_ENDPOINT
+
+  postgres:
+    container_name: myfinance-postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_DB: ${POSTGRES_DB:-myfinance_db}
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - postgres:/data/postgres
+      
+volumes:
+  postgres:
