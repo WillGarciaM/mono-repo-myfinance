@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
   const [descricao, setDescricao] = useState(initialData.descricao || '');
-  const [tipo, setType] = useState(initialData.descricao || '');
+  const [tipo, setTipo] = useState(initialData.tipo || '');
+
+  useEffect(() => {
+    if (initialData.tipo) {
+      setTipo(initialData.tipo);
+    }
+  }, [initialData.tipo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,15 +19,23 @@ const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Descrição:</label>
-        <input type="text" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
+        <input
+          type="text"
+          value={descricao}
+          onChange={(e) => setDescricao(e.target.value)}
+          required
+        />
       </div>
       <div>
         <label>Tipo:</label>
         <div>
           <label>
             <input
-              type="radio" value="despesa" checked={tipo === 'despesa'} required
-              onChange={(e) => setType(e.target.value)}
+              type="radio"
+              value="Despesa"
+              checked={tipo === 'Despesa'}
+              required
+              onChange={(e) => setTipo(e.target.value)}
             />
             Despesa
           </label>
@@ -29,10 +43,13 @@ const AccountPlanForm = ({ onSubmit, initialData = {} }) => {
         <div>
           <label>
             <input
-              type="radio" value="recebimento" checked={tipo === 'recebimento'} required
-              onChange={(e) => setType(e.target.value)}
+              type="radio"
+              value="Receita"
+              checked={tipo === 'Receita'}
+              required
+              onChange={(e) => setTipo(e.target.value)}
             />
-            Recebimento
+            Receita
           </label>
         </div>
       </div>

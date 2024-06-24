@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAccountsPlans, searchAccountsPlan, deleteAccountPlan } from '../api/api';
+import { getAccountPlan, searchAccountPlan, deleteAccountPlan } from '../api/api';
 import axios from "axios";
 import baseURL from '../common/baseURL';
 
@@ -22,10 +22,10 @@ const ListAccountsPlans = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         if (searchQuery) {
-            const response = await searchAccountsPlan({ descricao: searchQuery });
+            const response = await searchAccountPlan({ descricao: searchQuery });
             setAccountsPlans(response.data);
         } else {
-            const response = await getAccountsPlans();
+            const response = await getAccountPlan();
             setAccountsPlans(response.data);
         }
     };
@@ -68,7 +68,7 @@ const ListAccountsPlans = () => {
                     <li key={accountPlan.id}>
                         <span>{accountPlan.descricao}</span>
                         <span>
-                            <Link to={`/edit/${accountPlan.id}`}>Editar</Link>
+                            <Link to={`/edit-account-plan/${accountPlan.id}`}>Editar</Link>
                             <button onClick={() => handleDelete(accountPlan.id)}>Excluir</button>
                         </span>
                     </li>
