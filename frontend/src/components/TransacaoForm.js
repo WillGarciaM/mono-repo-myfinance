@@ -15,18 +15,18 @@ const TransacaoForm = ({ onSubmit, initialData = {}, calledFor }) => {
       await axios.get(`${baseURL}/plano-contas`).then((response) => {
         setSelectionPlanosDeContas(response.data);
       })
-
-      if (initialData) {
-        setData(moment(data).tz('Etc/GMT+0').format("YYYY-MM-DDTHH:mm"));
-      }
     };
+
+    if (initialData) {
+      setData(moment(data).tz('Etc/GMT+0').format("YYYY-MM-DDTHH:mm"));
+    }
 
     fetchSelectionPlanosDeContas();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ descricao, data, planoContas, valor});
+    onSubmit({ descricao, data, planoContas, valor });
   };
 
   return (
@@ -40,9 +40,9 @@ const TransacaoForm = ({ onSubmit, initialData = {}, calledFor }) => {
         <input type="datetime-local" value={data} onChange={(e) => setData(e.target.value)} required />
       </div>
       <div>
-        <label>Plano de Contas:</label> <>{console.log(planoContas)}</>
-        <select value={planoContas} onChange={(e) => setPlanoContas(e.target.value)} required>
-          <option value={planoContas}>Selecione um Plano de Contas</option>
+        <label>Plano de Contas:</label>
+        <select value={planoContas} onChange={(e) => setPlanoContas(e.target.value)} defaultValue={planoContas ? planoContas.descricao : ''} required>
+          <option value={planoContas ? planoContas.id : ''}>{planoContas ? planoContas.descricao : 'Selecione uma Opção'}</option>
           {selectionPlanosDeContas.map((plano) => (
             <option key={plano.id} value={plano.id}>{plano.descricao}</option>
           ))}

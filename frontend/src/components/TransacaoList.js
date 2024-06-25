@@ -121,7 +121,7 @@ const TransacaoList = () => {
             <ul>
                 {transacoes.map((transacao) => (
                     <li key={transacao.id}>
-                        <span>{transacao.descricao} - R${transacao.valor} - {moment(transacao.data).tz('Etc/GMT+0').format('DD/MM/YYYY - HH:mm')}</span>
+                        <span>{transacao.descricao} - R${transacao.valor} - {moment(transacao.data).tz('Etc/GMT+0').format('DD/MM/YYYY - HH:mm')} - {transacao.planoContas.descricao}</span>
                         <span>
                             <Link to={`/edit/${transacao.id}`}>Editar</Link>
                             <button onClick={() => openDeleteModal(transacao.id)}>Excluir</button>
