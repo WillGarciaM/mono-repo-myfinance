@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TransacaoForm from '../components/TransacaoForm';
-import { getTransacaoById, updateTransacao, getTransacoes } from '../api/api';
+import { updateTransacao, getTransacoes } from '../api/api';
 
 const TransacaoEditPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialData, setInitialData] = useState(null);
-
-  const [transacoes, setTransacoes] = useState([]);
-  const [transacao, setTransacao] = useState([]);
 
   useEffect(() => {
     const fetchTransacao = async () => {
