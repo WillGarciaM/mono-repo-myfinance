@@ -10,7 +10,7 @@ Backend (William Neto): https://github.com/neto6/myfinance-nestjs-api/tree/maste
 ---
 
 # MyFinance
-### Equipe 
+### Equipe
 
 - Leonardo Ronchini [@leoronchini](https://github.com/leoronchini)
 - William Garcia [@willgarciam](https://github.com/WillGarciaM)

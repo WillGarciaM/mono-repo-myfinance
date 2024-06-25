@@ -5,6 +5,9 @@ WORKDIR "/app"
 
 COPY ./package.json ./
 
+RUN npm install --save moment
+RUN npm install --save react-chartjs-2
+RUN npm install --save moment-timezone
 RUN npm install
 
 EXPOSE 3000
