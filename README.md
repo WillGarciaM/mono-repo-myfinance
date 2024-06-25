@@ -69,5 +69,3 @@ Aguarde a subida do docker e o sistema estará pronto para ser usado.
 > Caso ocorra algum conflito com as portas, o docker irá avisar.
 >
 > Pare os processos que estão utilizando as mesmas portas e o problema estará resolvido.
-
-...Em desenvolvimento.
